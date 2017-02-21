@@ -8,11 +8,11 @@ import org.apache.log4j.PropertyConfigurator;
 import org.testng.Assert;
 
 
-public class LogConfig {
+public class Log {
 
 	private static Logger log;
 
-	public static void initLogCfg() {
+	public static void initLog() {
 		String rootPath = null;
 		File directory = new File("");
 		try {
@@ -37,10 +37,12 @@ public class LogConfig {
 	}
 	public static void writeErrorInfo(String msg) {
 		TestCaseLog.writeErrorInfo(msg);
+		Assert.assertTrue(false);
+
 	}
 	public static void main(String[] args) {
-		LogConfig.initLogCfg();
-		LogConfig.writeInfo("dddd");
-		LogConfig.writeErrorInfo("sss");
+		Log.initLog();
+		Log.writeInfo("dddd");
+		Log.writeErrorInfo("sss");
 	}
 }

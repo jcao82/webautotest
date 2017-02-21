@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 public class TestCaseLog {
 
-	private static d impl = new d();
+	private static InitLog impl = new InitLog();
 
 	public static void writeInfo(String paramString) {
 		impl.writeInfo(paramString);
@@ -15,7 +15,7 @@ public class TestCaseLog {
 	}
 
 	public static void setLogger(Logger paramLogger) {
-		impl.a(paramLogger);
+		impl.setLog(paramLogger);
 	}
 
 }

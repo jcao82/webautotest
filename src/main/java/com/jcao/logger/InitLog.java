@@ -3,11 +3,11 @@ package com.jcao.logger;
 import org.apache.log4j.Logger;
 import org.testng.Reporter;
 
-public class d {
+public class InitLog {
 
 	private Logger log;
 
-	public void a(Logger paramLogger) {
+	public void setLog(Logger paramLogger) {
 		this.log = paramLogger;
 	}
 	

@@ -1,50 +1,9 @@
-2017-02-10-22:07:52  sss
-2017-02-10-22:09:06  sss
-2017-02-10-22:09:20  sss
-2017-02-10 22:09:59,396 {yyyy-MM-dd-HH:mm:ss}  sss
-2017-02-10 22:12:12,411 {yyyy-MM-dd-HH:mm:ss}  sss
-2017-02-10 22:12:30,078 {yyyy-MM-dd-HH:mm:ss}  dddd
-2017-02-10 22:12:30,080 {yyyy-MM-dd-HH:mm:ss}  sss
-2017-02-10-22:13:18  dddd
-2017-02-10-22:13:18  sss
-2017-02-10-22:17:54  dddd
-2017-02-10-22:17:54  sss
-2017-02-10-22:18:08  dddd
-2017-02-10-22:18:08  sss
-2017-02-10 22:18:52,548dddd{yyyy-MM-dd-HH:mm:ss}  dddd
-2017-02-10 22:18:52,551sss{yyyy-MM-dd-HH:mm:ss}  sss
-2017-02-10 22:18:54,009dddd{yyyy-MM-dd-HH:mm:ss}  dddd
-2017-02-10 22:18:54,011sss{yyyy-MM-dd-HH:mm:ss}  sss
-2017-02-10 22:19:12,6582017-02-10-22:19:12  dddd
-2017-02-10 22:19:12,6612017-02-10-22:19:12  sss
- INFO2017-02-10-22:19:37  dddd
-ERROR2017-02-10-22:19:37  sss
-2017-02-10-22:21:35  dddd
- com.jcao.logger.d.writeInfo(d.java:15)2017-02-10-22:21:35  sss
- com.jcao.logger.d.writeErrorInfo(d.java:20)dddd
-sss
-dddd
-sss
-2017-02-10-22:23:01  dddd
- com.jcao.logger.d.writeInfo(d.java:15)2017-02-10-22:23:01  sss
- com.jcao.logger.d.writeErrorInfo(d.java:20)2017-02-10-22:23:25  dddd
- com.jcao.logger.d.writeInfo(d.java:15)2017-02-10-22:23:25  sss
- com.jcao.logger.d.writeErrorInfo(d.java:20)2017-02-10-22:23:35  dddd
- com.jcao.logger.d.writeInfo(d.java:15)2017-02-10-22:23:35  sss
- com.jcao.logger.d.writeErrorInfo(d.java:20)2017-02-10-22:23:50  dddd
- com.jcao.logger.d.writeInfo(d.java:15)2017-02-10-22:23:50  sss
- com.jcao.logger.d.writeErrorInfo(d.java:20)2017-02-10-22:24:29  dddd
- com.jcao.logger.d.writeInfo(d.java:15)2017-02-10-22:24:29  sss
- com.jcao.logger.d.writeErrorInfo(d.java:20)2017-02-10-22:24:47  dddd
- com.jcao.logger.d.writeInfo(d.java:15)2017-02-10-22:24:47  sss
- com.jcao.logger.d.writeErrorInfo(d.java:20)2017-02-10-22:25:03  dddd
- com.jcao.logger.d.writeInfo(d.java:15)2017-02-10-22:25:03  sss
- com.jcao.logger.d.writeErrorInfo(d.java:20)2017-02-10-22:25:18  dddd
- 2017-02-10-22:25:18  sss
- 2017-02-10-22:25:38  dddd
- 2017-02-10-22:25:38  sss
- 2017-02-10-22:26:22  dddd
- 2017-02-10-22:26:22  sss
- 2017-02-10-22:26:39  dddd
- 2017-02-10-22:26:39  sss
+2017-02-21-09:56:35  a = B 被写入.
+ 2017-02-21-09:56:47  a = C 被写入.
+ 2017-02-21-10:02:09  a = C 被写入.
+ 2017-02-21-10:06:33  a = sC 成功写入.
+ 2017-02-21-10:06:33  1a = C 成功更新.
+ 2017-02-21-10:06:58  1a = C 成功更新.
+ 2017-02-21-10:07:10  a = sC 成功写入.
+ 2017-02-21-10:07:41  a = sC 成功写入.
  
