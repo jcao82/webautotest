@@ -1,8 +1,16 @@
 package com.jcao.pagefunction;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -44,6 +52,7 @@ public class Page {
 			highlightElement(webdriver, webElement);
 			Log.writeInfo(MessageProperties.msgReadProperty("selectedElement"));
 		} catch (Exception e) {
+			takeScreenShot(webdriver);
 			Log.writeErrorInfo(MessageProperties.msgReadProperty("elementNotExist"));
 			Assert.assertTrue(false);
 
@@ -59,7 +68,7 @@ public class Page {
 			return true;
 		} catch (Exception e) {
 			Log.writeErrorInfo(MessageProperties.msgReadProperty("elementNotExist"));
-			webdriver.quit();
+			takeScreenShot(webdriver);
 			Assert.assertTrue(false);
 			return false;
 		}
@@ -89,8 +98,9 @@ public class Page {
 			Log.writeInfo(MessageProperties.msgReadProperty("clickButtonByJS"));
 
 		} catch (Exception e) {
-			Assert.assertTrue(false);
 			Log.writeErrorInfo(MessageProperties.msgReadProperty("errorClickButtonByJS"));
+			takeScreenShot(webdriver);
+			Assert.assertTrue(false);
 		}
 
 	}
@@ -122,19 +132,29 @@ public class Page {
 	}
 
 	public static void takeScreenShot(WebDriver driver) {
-		String nowDate =Utils.getNowDate();
-		
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
+		//格式化当前时间，例如20120406-165210
+		String time = sdf.format(new Date());
+		String dir_name = "./resources/screenshot";
+
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		try {
+			// 将截图存放到指定目录,并以当前时间戳作为文件名保存
+			FileUtils.copyFile(scrFile, new File(dir_name + File.separator + time + ".png"));
+			Log.writeInfo(MessageProperties.msgReadProperty("screenshot")+dir_name);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
-	
+
 	public static void main(String[] args) {
 
 		Page page = new Page(new FirefoxDriver());
 		page.goToURL("http://www.baidu.com");
 		System.out.println("@@@:" + page.isWebElementExist(By.xpath(".//*[@id='kw']")));
 		System.out.println("@@@:" + page.waitElement(By.xpath(".//*[@id='kw']")).getAttribute("name"));
-		page.findElementById("kws").sendKeys("sss");
-		;
+		page.findElementById("kw1").sendKeys("sssees");
 		Utils.sleepinMsec(5000);
 		driver.quit();
 	}
