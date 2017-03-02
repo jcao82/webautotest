@@ -149,12 +149,12 @@ public class Page {
 	}
 
 	public static void main(String[] args) {
-
+		
 		Page page = new Page(new FirefoxDriver());
 		page.goToURL("http://www.baidu.com");
 		System.out.println("@@@:" + page.isWebElementExist(By.xpath(".//*[@id='kw']")));
 		System.out.println("@@@:" + page.waitElement(By.xpath(".//*[@id='kw']")).getAttribute("name"));
-		page.findElementById("kw1").sendKeys("sssees");
+		page.findElementById("kw").sendKeys("sssees");
 		Utils.sleepinMsec(5000);
 		driver.quit();
 	}
