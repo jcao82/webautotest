@@ -1,4 +1,4 @@
-package com.jcao.util.data;
+package com.jcao.data;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-public class ElementDataSet {
+public class ExcelWebElement {
 
 	public static ArrayList<String> getElementAsList(String name) {
 
@@ -21,6 +21,7 @@ public class ElementDataSet {
 
 		ArrayList<String> list = new ArrayList<String>();
 		Workbook book = null;
+
 		try {
 
 			book = Workbook.getWorkbook(new File("./resources/ElementData.xls"));
@@ -70,29 +71,30 @@ public class ElementDataSet {
 
 			e.printStackTrace();
 		}
+
 		book.close();
 		return list;
 	}
 
 	public static String getElementPath(String element) {
+
 		String str = "";
 		ArrayList<String> list = null;
-		
-		
+
 		try {
 
-			list = ElementDataSet.getElementAsList(element);
+			list = ExcelWebElement.getElementAsList(element);
 			str = list.get(1);
 
 		} catch (Exception e) {
-			Assert.assertFalse("Element " + list.get(0) + " has no value", true);
 
+			Assert.assertFalse("Element " + list.get(0) + " has no value", true);
 			e.printStackTrace();
 		}
 		return str;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(getElementPath("百度"));
-	}
+	// public static void main(String[] args) {
+	// System.out.println(getElementPath("百度"));
+	// }
 }

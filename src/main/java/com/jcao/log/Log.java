@@ -1,4 +1,4 @@
-package com.jcao.logger;
+package com.jcao.log;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class Log {
 		}
 		try {
 			
-			PropertyConfigurator.configure(rootPath + "//resources//log.ini");
+			PropertyConfigurator.configure(rootPath + "//resources//log4j.ini");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

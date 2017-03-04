@@ -1,0 +1,25 @@
+2017-02-26-18:17:26  Goto  http://www.baidu.com
+ 2017-02-26-18:17:38  The element is exist.
+ 2017-02-26-18:17:38  The element is NOT exist.
+ 2017-02-26-18:19:47  Goto  http://www.baidu.com
+ 2017-02-26-18:19:50  The element is exist.
+ 2017-02-26-18:19:50  The element is NOT exist.
+ 2017-02-26-18:20:34  Goto  http://www.baidu.com
+ 2017-02-26-18:20:35  The element is exist.
+ 2017-02-26-18:20:35  Selected object
+ 2017-02-26-18:23:07  Goto  http://www.baidu.com
+ 2017-02-26-18:23:07  The element is exist.
+ 2017-02-26-18:23:07  Selected object
+ 2017-02-26-18:23:08  Take screenshot, the path is: 
+ 2017-02-26-18:26:24  Goto  http://www.baidu.com
+ 2017-02-26-18:26:24  The element is exist.
+ 2017-02-26-18:26:24  Selected object
+ 2017-02-26-18:26:25  Take screenshot, the path is: ./resources/screenshot
+ 2017-02-26-18:46:58  Goto  http://www.baidu.com
+ 2017-02-26-18:46:59  The element is exist.
+ 2017-02-26-18:46:59  The element is NOT exist.
+ 2017-02-26-18:47:54  Goto  http://www.baidu.com
+ 2017-02-26-18:47:55  The element is exist.
+ 2017-02-26-18:47:56  Take screenshot, the path is: ./resources/screenshot
+ 2017-02-26-18:47:56  The element is NOT exist.
+ 

@@ -1,4 +1,4 @@
-package com.jcao.pagefunction;
+package com.jcao.page;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,16 +17,19 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.jcao.logger.Log;
+import com.jcao.data.ExcelWebElement;
+import com.jcao.data.PropertyFiles;
+import com.jcao.log.Log;
 import com.jcao.util.Utils;
-import com.jcao.util.data.MessageProperties;
 
 public class Page {
 
 	private WebDriver webdriver = null; // 仅限类内使用的WebDriver
+	private static String msgProp = "./resources/PropertyFiles/message.properties";
+	private static long timeOutInSeconds = 30;
+
 	public static WebDriver driver = null;
 
-	private static long timeOutInSeconds = 30;
 
 	public Page(WebDriver mydriver) {
 		Log.initLog();
@@ -41,19 +44,19 @@ public class Page {
 	}
 
 	public void goToURL(String url) {
-		Log.writeInfo(MessageProperties.msgReadProperty("url") + "  " + url);
+		Log.writeInfo(PropertyFiles.getValue(msgProp,"url") + "  " + url);
 		webdriver.get(url);
 	}
 
 	public WebElement findElementById(String elementName) {
 		WebElement webElement = null;
 		try {
-			webElement = webdriver.findElement(By.id(elementName));
+			webElement = webdriver.findElement(By.id(ExcelWebElement.getElementPath(elementName)));
 			highlightElement(webdriver, webElement);
-			Log.writeInfo(MessageProperties.msgReadProperty("selectedElement"));
+			Log.writeInfo(PropertyFiles.getValue(msgProp,"selectedElement"));
 		} catch (Exception e) {
 			takeScreenShot(webdriver);
-			Log.writeErrorInfo(MessageProperties.msgReadProperty("elementNotExist"));
+			Log.writeErrorInfo(PropertyFiles.getValue(msgProp,"elementNotExist"));
 			Assert.assertTrue(false);
 
 		}
@@ -63,11 +66,11 @@ public class Page {
 	public boolean isWebElementExist(By selector) {
 		try {
 			webdriver.findElement(selector);
-			Log.writeInfo(MessageProperties.msgReadProperty("isWebElementExist"));
+			Log.writeInfo(PropertyFiles.getValue(msgProp,"isWebElementExist"));
 
 			return true;
 		} catch (Exception e) {
-			Log.writeErrorInfo(MessageProperties.msgReadProperty("elementNotExist"));
+			Log.writeErrorInfo(PropertyFiles.getValue(msgProp,"elementNotExist"));
 			takeScreenShot(webdriver);
 			Assert.assertTrue(false);
 			return false;
@@ -95,10 +98,10 @@ public class Page {
 		try {
 
 			((JavascriptExecutor) webdriver).executeScript("arguments[0].click();", webElement);
-			Log.writeInfo(MessageProperties.msgReadProperty("clickButtonByJS"));
+			Log.writeInfo(PropertyFiles.getValue(msgProp,"clickButtonByJS"));
 
 		} catch (Exception e) {
-			Log.writeErrorInfo(MessageProperties.msgReadProperty("errorClickButtonByJS"));
+			Log.writeErrorInfo(PropertyFiles.getValue(msgProp,"errorClickButtonByJS"));
 			takeScreenShot(webdriver);
 			Assert.assertTrue(false);
 		}
@@ -141,7 +144,7 @@ public class Page {
 		try {
 			// 将截图存放到指定目录,并以当前时间戳作为文件名保存
 			FileUtils.copyFile(scrFile, new File(dir_name + File.separator + time + ".png"));
-			Log.writeInfo(MessageProperties.msgReadProperty("screenshot")+dir_name);
+			Log.writeInfo(PropertyFiles.getValue(msgProp,"screenshot")+dir_name);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -152,10 +155,9 @@ public class Page {
 		
 		Page page = new Page(new FirefoxDriver());
 		page.goToURL("http://www.baidu.com");
-		System.out.println("@@@:" + page.isWebElementExist(By.xpath(".//*[@id='kw']")));
-		System.out.println("@@@:" + page.waitElement(By.xpath(".//*[@id='kw']")).getAttribute("name"));
-		page.findElementById("kw").sendKeys("sssees");
-		Utils.sleepinMsec(5000);
-		driver.quit();
+		System.out.println(page.webdriver.getTitle());
+		Utils.sleepinMsec(3000);
+		
+		page.webdriver.quit();
 	}
 }

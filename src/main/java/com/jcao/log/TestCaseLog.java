@@ -1,4 +1,4 @@
-package com.jcao.logger;
+package com.jcao.log;
 
 import org.apache.log4j.Logger;
 
