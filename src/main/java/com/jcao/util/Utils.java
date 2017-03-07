@@ -11,11 +11,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Utils {
+import com.jcao.log.Log;
 
-	public static void sleepinMsec(int msec) {
+public class Utils {
+	
+	public Utils(){
+		Log.initLog();
+	}
+
+	public static void waitSecond(int sec) {
 		try {
+			int msec = sec*1000;
 			Thread.sleep(msec);
+			Log.info("Wait "+ sec +" second");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

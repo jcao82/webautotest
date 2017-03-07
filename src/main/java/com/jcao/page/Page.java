@@ -4,32 +4,27 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
-import com.jcao.data.ExcelWebElement;
-import com.jcao.data.PropertyFiles;
 import com.jcao.log.Log;
-import com.jcao.util.Utils;
 
 public class Page {
 
 	private WebDriver webdriver = null; // 仅限类内使用的WebDriver
-	private static String msgProp = "./resources/PropertyFiles/message.properties";
-	private static long timeOutInSeconds = 30;
 
 	public static WebDriver driver = null;
-
 
 	public Page(WebDriver mydriver) {
 		Log.initLog();
@@ -37,49 +32,29 @@ public class Page {
 		driver = mydriver;
 	}
 
-	public Page() {
-		if (this.webdriver == null) {
-			this.webdriver = driver;
-		}
-	}
-
 	public void goToURL(String url) {
-		Log.writeInfo(PropertyFiles.getValue(msgProp,"url") + "  " + url);
+		Log.info("Goto" + ": " + url);
 		webdriver.get(url);
 	}
 
-	public WebElement findElementById(String elementName) {
-		WebElement webElement = null;
+	
+	
+	public boolean isXpathAvailable(String xpath) {
+		Boolean isExist = false;
 		try {
-			webElement = webdriver.findElement(By.id(ExcelWebElement.getElementPath(elementName)));
-			highlightElement(webdriver, webElement);
-			Log.writeInfo(PropertyFiles.getValue(msgProp,"selectedElement"));
-		} catch (Exception e) {
-			takeScreenShot(webdriver);
-			Log.writeErrorInfo(PropertyFiles.getValue(msgProp,"elementNotExist"));
-			Assert.assertTrue(false);
-
-		}
-		return webElement;
-	}
-
-	public boolean isWebElementExist(By selector) {
-		try {
-			webdriver.findElement(selector);
-			Log.writeInfo(PropertyFiles.getValue(msgProp,"isWebElementExist"));
-
-			return true;
-		} catch (Exception e) {
-			Log.writeErrorInfo(PropertyFiles.getValue(msgProp,"elementNotExist"));
-			takeScreenShot(webdriver);
-			Assert.assertTrue(false);
-			return false;
+			
+			final By by = By.xpath(xpath);
+			return webdriver.findElements(by).size()>0;
+			
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+			return isExist;
 		}
 	}
 
-	public WebElement waitElement(final By ByPath) {
+	public WebElement waitElement(final By ByPath, long timeout) {
 
-		WebDriverWait driverWait = new WebDriverWait(webdriver, timeOutInSeconds);
+		WebDriverWait driverWait = new WebDriverWait(webdriver, timeout);
 
 		WebElement element = driverWait.until(new ExpectedCondition<WebElement>() {
 
@@ -98,10 +73,8 @@ public class Page {
 		try {
 
 			((JavascriptExecutor) webdriver).executeScript("arguments[0].click();", webElement);
-			Log.writeInfo(PropertyFiles.getValue(msgProp,"clickButtonByJS"));
 
 		} catch (Exception e) {
-			Log.writeErrorInfo(PropertyFiles.getValue(msgProp,"errorClickButtonByJS"));
 			takeScreenShot(webdriver);
 			Assert.assertTrue(false);
 		}
@@ -125,7 +98,7 @@ public class Page {
 		return element;
 	}
 
-	public static void highlightElement(WebDriver driver, WebElement element) {
+	public void highlightElement(WebDriver driver, WebElement element) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("element = arguments[0];" + "original_style = element.getAttribute('style');"
@@ -136,7 +109,7 @@ public class Page {
 
 	public static void takeScreenShot(WebDriver driver) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
-		//格式化当前时间，例如20120406-165210
+		// 格式化当前时间，例如20120406-165210
 		String time = sdf.format(new Date());
 		String dir_name = "./resources/screenshot";
 
@@ -144,7 +117,6 @@ public class Page {
 		try {
 			// 将截图存放到指定目录,并以当前时间戳作为文件名保存
 			FileUtils.copyFile(scrFile, new File(dir_name + File.separator + time + ".png"));
-			Log.writeInfo(PropertyFiles.getValue(msgProp,"screenshot")+dir_name);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -152,12 +124,11 @@ public class Page {
 	}
 
 	public static void main(String[] args) {
-		
-		Page page = new Page(new FirefoxDriver());
+
+		Page page = new Page(new HtmlUnitDriver());
 		page.goToURL("http://www.baidu.com");
-		System.out.println(page.webdriver.getTitle());
-		Utils.sleepinMsec(3000);
+		System.out.println(By.);
+		page.webdriver.close();
 		
-		page.webdriver.quit();
 	}
 }
